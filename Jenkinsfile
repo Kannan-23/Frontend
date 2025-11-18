@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = 'us-east-1'
+        AWS_DEFAULT_REGION = 'ap-south-1'
         S3_BUCKET = 'project-frontend-bucket-10-11-25 '
     }
 
@@ -24,7 +24,7 @@ pipeline {
 
         stage('Deploy to S3 & Invalidate CloudFront') {
             steps {
-                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                withAWS(credentials: 'aws-credentials', region: 'ap-south-1') {
                     sh 'aws s3 sync build/ s3://$S3_BUCKET --delete'
                     sh 'aws cloudfront create-invalidation --distribution-id E28B08W45JIKSL --paths "/*"'
                 }

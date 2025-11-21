@@ -3,14 +3,14 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
-        S3_BUCKET = 'project-frontend-bucket-10-11-25 '
+        S3_BUCKET = 'kannan23121999'
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Amruta9993/Frontend-new-project.git',
+                    url: 'https://github.com/Kannan-23/Frontend.git',
                     credentialsId: 'frontend'
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'ap-south-1') {
                     sh 'aws s3 sync build/ s3://$S3_BUCKET --delete'
-                    sh 'aws cloudfront create-invalidation --distribution-id E28B08W45JIKSL --paths "/*"'
+                    sh 'aws cloudfront create-invalidation --distribution-id E358LUA08TOA31 --paths "/*"'
                 }
             }
         }
